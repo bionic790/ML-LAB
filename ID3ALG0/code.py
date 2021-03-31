@@ -25,7 +25,8 @@ def entropy_of_list(ls,value):
     print("Probability of Class {0} is: {1:.4f}".format(min(cnt),min(probs)))
     print("Probability of Class {0} is: {1:.4f}".format(max(cnt),max(probs)))
     return entropy(probs) # Call Entropy
-  def information_gain(df, split_attribute, target_attribute,battr):
+
+def information_gain(df, split_attribute, target_attribute,battr):
     print("\n\n-----Information Gain Calculation of ",split_attribute, " --------") 
     df_split = df.groupby(split_attribute) # group the data based on attribute values
     glist=[]
@@ -48,7 +49,8 @@ def entropy_of_list(ls,value):
     else:
         old_entropy = entropy_of_list(df[target_attribute],battr)
     return old_entropy - new_entropy
-  def id3(df, target_attribute, attribute_names, default_class=None,default_attr='S'):
+
+def id3(df, target_attribute, attribute_names, default_class=None,default_attr='S'):
     
     from collections import Counter
     cnt = Counter(x for x in df[target_attribute])# class of YES /NO
@@ -85,7 +87,7 @@ def entropy_of_list(ls,value):
             subtree = id3(data_subset,target_attribute, remaining_attribute_names,default_class,best_attr)
             tree[best_attr][attr_val] = subtree
         return tree
-      from pprint import pprint
+from pprint import pprint
 tree = id3(df,t,attribute_names)
 print("\nThe Resultant Decision Tree is:")
 pprint(tree)
@@ -99,6 +101,6 @@ def classify(instance, tree,default=None): # Instance of Play Tennis with Predic
             return result # this is a label
     else:
         return default
-      df_new=pd.read_csv('PlayTennisTest.csv')
+df_new=pd.read_csv('PlayTennisTest.csv')
 df_new['predicted'] = df_new.apply(classify, axis=1, args=(tree,'?')) 
 print(df_new)
